@@ -1,7 +1,7 @@
 import csv
 import re
 
-COMPANY_URI = 'http://duns.com/%s/'
+COMPANY_URI = 'http://duns.com/duns/%s/'
 
 COMPANY_OBJECTS = ['CASE_GLOB_ULT', 'FRANCHISE_TYPE1', 'OP_DUNS1', 'OP_DUNS_GLOB_ULT1', 'FRANCHISE_TYPE2', 'OP_DUNS2', 'OP_DUNS_GLOB_ULT2',
            'OP_DUNS3', 'OP_DUNS_GLOB_ULT3', 'FRANCHISE_TYPE3', 'OP_DUNS4', 'FRANCHISE_TYPE4', 'OP_DUNS_GLOB_ULT4', 'FRANCHISE_TYPE5',
@@ -86,6 +86,4 @@ def map_to_triples(row):
 with open("CPARDO_parsed.csv", "r") as csv_in:
     reader = csv.DictReader(csv_in)
     for row in reader:
-        #print("CASE_DUNS: " + row['CASE_DUNS'])
-        #print("MIN_JOINT_VENT_DUNS1" + row['MIN_JOINT_VENT_DUNS1'])
         map_to_triples(row)
