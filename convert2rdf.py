@@ -1,7 +1,7 @@
 import csv
 import re
 
-COMPANY_URI = 'http://duns.com/duns/%s/'
+COMPANY_URI = 'http://dnb.com/duns/%s'
 
 COMPANY_OBJECTS = ['CASE_GLOB_ULT', 'FRANCHISE_TYPE1', 'OP_DUNS1', 'OP_DUNS_GLOB_ULT1', 'FRANCHISE_TYPE2', 'OP_DUNS2', 'OP_DUNS_GLOB_ULT2',
            'OP_DUNS3', 'OP_DUNS_GLOB_ULT3', 'FRANCHISE_TYPE3', 'OP_DUNS4', 'FRANCHISE_TYPE4', 'OP_DUNS_GLOB_ULT4', 'FRANCHISE_TYPE5',
@@ -11,10 +11,10 @@ JV_ATTRS = ['PCT_OWNERSHIP_' + str(i) for i in range(1, 7)]
 EXCLUDED_ATTRS = ['CASE_DUNS']
 
 def triple_object(subject, predicate, object):
-    return "<%s>, <%s>, <%s>" % (subject, predicate, object)
+    return "<%s> <%s> <%s> ." % (subject, predicate, object)
 
 def triple_literal(subject, predicate, object):
-    return "<%s>, <%s>, '%s'" % (subject, predicate, object)
+    return "<%s> <%s> \"%s\" ." % (subject, predicate, object)
 
 def set_company_uri(key, val, context):
     context['company_uri'] = COMPANY_URI % val
@@ -74,6 +74,7 @@ def map_to_triples(row):
         if not val:
             continue
 
+        row[key] = val
         if key in COMPANY_OBJECTS:
             generic_triple_company_object(key, row[key], context)
         elif key in JV_OBJECTS:
